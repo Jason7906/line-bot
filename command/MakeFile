@@ -1,0 +1,31 @@
+# Variables
+PROJECT_NAME := my-project
+MONGODB_CONTAINER_NAME := my-mongo
+MONGODB_PORT := 27017
+
+.PHONY: help clean test run-mongo stop-mongo
+
+# Help command
+help:
+	@echo "Available commands:"
+	@echo "  clean             Remove build artifacts and stop running containers"
+	@echo "  test              Run tests"
+	@echo "  run-mongo         Start a MongoDB container"
+	@echo "  stop-mongo        Stop the running MongoDB container"
+
+# Clean command
+clean:
+	@docker stop $(MONGODB_CONTAINER_NAME) || true
+	@docker rm $(MONGODB_CONTAINER_NAME) || true
+
+# Test command
+test:
+	@go test -v ./...
+
+# Run MongoDB command
+run-mongo:
+	@docker run -d --name $(MONGODB_CONTAINER_NAME) -p $(MONGODB_PORT):$(MONGODB_PORT) mongo:4.4
+
+# Stop MongoDB command
+stop-mongo:
+	@docker stop $(MONGODB_CONTAINER_NAME) || true

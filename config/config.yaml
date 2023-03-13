@@ -1,0 +1,9 @@
+database:
+  host: "127.0.0.1"
+  user: "root"
+  password: "123456"
+  port: 27017
+
+linebot:
+  channelSecret: "從line developer後台取得"
+  channelAccessToken: "從line developer後台取得"
